@@ -26,7 +26,7 @@ def moveForward():
     if car is None:
         print("Car not initialized")
     else:
-        car.moveBackward()
+        car.moveForward()
         print("Mowing car forward.")
 
 
