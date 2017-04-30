@@ -61,5 +61,15 @@ def moveLeft():
         print("Mowing car left")
 
 
+@app.route("/cleanup")
+def cleanup():
+    global car
+    if car is None:
+        print("Car not initialized")
+    else:
+        car.cleanup()
+        print("Mowing car left")
+
+
 if __name__ == "__main__":
     app.run()
