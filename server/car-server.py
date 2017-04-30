@@ -4,6 +4,7 @@ from lib.utils import Car
 
 app = Flask(__name__)
 car = None
+isInitialized = False
 
 
 @app.route("/")
@@ -13,63 +14,98 @@ def welcome():
 
 @app.route("/init")
 def init():
-    left = [17, 27, 22]
-    right = [18, 23, 24]
-    duration = 1
     global car
-    car = Car(left, right, duration)
-    print("Car successfully created.")
+    global isInitialized
+
+    if isInitialized:
+        answer = "Car is already initialized."
+        answer += "\nContinuing... anyway"
+    else:
+        leftMotor = [17, 27, 22]
+        rightMotor = [18, 23, 24]
+        duration = 1
+        car = Car(leftMotor, rightMotor, duration)
+        isInitialized = True
+        answer = "Car successfully created."
+    print(answer)
+    return answer
 
 
 @app.route("/moveForward")
 def moveForward():
-    global car
-    if car is None:
-        print("Car not initialized")
+    if isInitialized:
+        forward = 'f'
+        __move(forward)
+        answer = "Moving forward..."
     else:
-        car.moveForward()
-        print("Mowing car forward.")
+        answer = "Car is not initialized."
+    print(answer)
+    return answer
 
 
 @app.route("/moveBackward")
 def moveBackward():
-    global car
-    if car is None:
-        print("Car not initialized")
+    if isInitialized:
+        backward = 'b'
+        __move(backward)
+        answer = "Moving backward..."
     else:
-        car.moveBackward()
-        print("Mowing car backwards")
+        answer = "Car is not initialized."
+    print(answer)
+    return answer
 
 
 @app.route("/moveRight")
 def moveRight():
-    global car
-    if car is None:
-        print("Car not initialized")
+    if isInitialized:
+        right = 'r'
+        __move(right)
+        answer = "Moving right..."
     else:
-        car.moveRight()
-        print("Mowing car right")
+        answer = "Car is not initialized."
+    print(answer)
+    return answer
 
 
 @app.route("/moveLeft")
 def moveLeft():
-    global car
-    if car is None:
-        print("Car not initialized")
+    if isInitialized:
+        left = 'l'
+        __move(left)
+        answer = "Moving left..."
     else:
-        car.moveLeft()
-        print("Mowing car left")
+        answer = "Car is not initialized."
+    print(answer)
+    return answer
 
 
 @app.route("/cleanup")
 def cleanup():
     global car
-    if car is None:
-        print("Car not initialized")
-    else:
+    global isInitialized
+
+    if isInitialized:
+        answer = "Cleaning car..."
         car.cleanup()
-        print("Mowing car left")
+        isInitialized = False
+        answer += "\nCar cleaned up."
+    else:
+        answer = "Car is not initialized."
+        answer += "\nNot cleaning up..."
+    print(answer)
+    return answer
+
+
+def __move(direction):
+    if direction == 'f':
+        car.moveForward()
+    elif direction == 'b':
+        car.moveBackward()
+    elif direction == 'r':
+        car.moveRight()
+    elif direction == 'l':
+        car.moveLeft()
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='192.168.0.19', port=3000)
