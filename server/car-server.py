@@ -1,5 +1,6 @@
 from flask import Flask
-from car.v1.Car import Car
+from lib.utils import Car
+
 
 app = Flask(__name__)
 car = None
@@ -38,6 +39,27 @@ def moveBackward():
     else:
         car.moveBackward()
         print("Mowing car backwards")
+
+
+@app.route("/moveRight")
+def moveRight():
+    global car
+    if car is None:
+        print("Car not initialized")
+    else:
+        car.moveRight()
+        print("Mowing car right")
+
+
+@app.route("/moveLeft")
+def moveLeft():
+    global car
+    if car is None:
+        print("Car not initialized")
+    else:
+        car.moveLeft()
+        print("Mowing car left")
+
 
 if __name__ == "__main__":
     app.run()
