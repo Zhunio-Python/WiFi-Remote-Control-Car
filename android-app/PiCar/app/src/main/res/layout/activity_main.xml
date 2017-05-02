@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.zhunio.picar.MainActivity">
+
+    <Button
+        android:text="Right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/backward"
+        android:id="@+id/right"
+        android:onClick="moveRight" />
+
+    <Button
+        android:text="Left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/left"
+        android:layout_alignBaseline="@+id/right"
+        android:layout_alignBottom="@+id/right"
+        android:layout_toStartOf="@+id/backward"
+        android:onClick="moveLeft" />
+
+    <Button
+        android:text="Forward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/forward"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/right"
+        android:layout_centerHorizontal="true"
+        android:onClick="moveForward" />
+
+    <Button
+        android:text="Cleanup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/backward"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="37dp"
+        android:id="@+id/cleanup"
+        android:onClick="cleanup" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:text="Host"
+        android:ems="10"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/forward"
+        android:id="@+id/host"
+        android:imeOptions="actionNext" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:text="Port"
+        android:ems="10"
+        android:id="@+id/port"
+        android:layout_below="@+id/host"
+        android:layout_alignStart="@+id/host"
+        android:imeOptions="actionDone" />
+
+    <Button
+        android:text="Backward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/backward"
+        android:layout_marginTop="15dp"
+        android:onClick="moveBackward"
+        android:layout_below="@+id/right"
+        android:layout_alignStart="@+id/forward" />
+
+</RelativeLayout>
