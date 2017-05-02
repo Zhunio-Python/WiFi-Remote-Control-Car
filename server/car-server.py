@@ -23,7 +23,7 @@ def init():
     else:
         leftMotor = [17, 27, 22]
         rightMotor = [18, 23, 24]
-        duration = 1
+        duration = 0.5
         car = Car(leftMotor, rightMotor, duration)
         isInitialized = True
         answer = "Car successfully created."
